@@ -1,0 +1,13 @@
+runtime: python310
+
+env_variables:
+  FLASK_ENV: "production"
+
+handlers:
+- url: /static
+  static_dir: frontend
+
+- url: /.*
+  script: auto
+
+entrypoint: gunicorn -b :$PORT wsgi:app

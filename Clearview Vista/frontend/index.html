@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clearview Capital - Plataforma Inteligente</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo-container">
+            <a href="#">
+                <img src="img/logo.png" alt="Clearview Capital" class="logo">
+            </a>
+        </div>
+        <div class="nav-container">
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#" class="nav-link active">Início</a></li>
+                <li class="nav-item"><a href="#carteira" class="nav-link">Carteira da Clearview</a></li>
+                <li class="nav-item"><a href="#favoritas" class="nav-link">Favoritas</a></li>
+                <li class="nav-item"><a href="#noticias" class="nav-link">Notícias</a></li>
+                <li class="nav-item"><a href="#relatorios" class="nav-link">Relatórios</a></li>
+                <li class="nav-item"><a href="#newsletter" class="nav-link">Newsletter</a></li>
+            </ul>
+        </div>
+        <div class="user-actions">
+            <button class="btn btn-outline" id="loginBtn">Entrar</button>
+            <button class="btn btn-primary" id="registerBtn">Cadastrar</button>
+        </div>
+        <div class="mobile-menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Barra de Pesquisa -->
+        <div class="search-container">
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="Pesquisar por código ou nome (ex: PETR4, Petrobras, Vale)">
+                <button class="search-btn">Pesquisar</button>
+            </div>
+            <div class="search-results" id="searchResults">
+                <!-- Resultados da pesquisa serão inseridos aqui via JavaScript -->
+            </div>
+            <div class="stock-details-panel" id="stockDetailsPanel">
+                <div class="stock-details-header">
+                    <div class="stock-details-title">
+                        <span id="stockSymbol">PETR4</span>
+                        <span id="stockName">PETROBRAS PN</span>
+                    </div>
+                    <div>
+                        <span class="stock-details-price" id="stockPrice">R$ 36,75</span>
+                        <span class="stock-details-change trend-up" id="stockChange">+2,15%</span>
+                    </div>
+                </div>
+                <div class="stock-details-tabs">
+                    <div class="stock-details-tab active" data-tab="overview">Visão Geral</div>
+                    <div class="stock-details-tab" data-tab="indicators">Indicadores</div>
+                    <div class="stock-details-tab" data-tab="chart">Gráfico</div>
+                    <div class="stock-details-tab" data-tab="news">Notícias</div>
+                </div>
+                <div class="stock-details-content active" id="overviewTab">
+                    <div class="stock-indicators">
+                        <div class="stock-indicator">
+                            <div class="stock-indicator-name">Preço/Lucro (P/L)</div>
+                            <div class="stock-indicator-value" id="peRatio">6,8</div>
+                        </div>
+                        <div class="stock-indicator">
+                            <div class="stock-indicator-name">Preço/Valor Patrimonial (P/VP)</div>
+                            <div class="stock-indicator-value" id="pbRatio">1,2</div>
+                        </div>
+                        <div class="stock-indicator">
+                            <div class="stock-indicator-name">ROE</div>
+                            <div class="stock-indicator-value" id="roe">18,5%</div>
+                        </div>
+                        <div class="stock-indicator">
+                            <div class="stock-indicator-name">Dividend Yield</div>
+                            <div class="stock-indicator-value" id="dividendYield">12,4%</div>
+                        </div>
+                        <div class="stock-indicator">
+                            <div class="stock-indicator-name">Dívida/EBITDA</div>
+                            <div class="stock-indicator-value" id="debtToEbitda">1,8</div>
+                        </div>
+                        <div class="stock-indicator">
+                            <div class="stock-indicator-name">Valor Justo (Graham)</div>
+                            <div class="stock-indicator-value" id="fairValue">R$ 42,30</div>
+                        </div>
+                        <div class="stock-indicator">
+                            <div class="stock-indicator-name">Potencial</div>
+                            <div class="stock-indicator-value trend-up" id="potential">+15,1%</div>
+                        </div>
+                        <div class="stock-indicator">
+                            <div class="stock-indicator-name">Avaliação IA</div>
+                            <div class="stock-indicator-value" id="aiRating">
+                                <span class="badge badge-success">Compra</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stock-details-content" id="indicatorsTab">
+                    <div class="stock-indicators">
+                        <div class="stock-indicator">
+                            <div class="stock-indicator-name">Lucro por Ação (LPA)</div>
+                            <div class="stock-indicator-value" id="eps">5,40</div>
+                        </div>
+                        <div class="stock-indicator">
+                            <div class="stock-indicator-name">Valor Patrimonial por Ação (VPA)</div>
+                            <div class="stock-indicator-value" id="bookValuePerShare">30,62</div>
+                        </div>
+                        <div class="stock-indicator">
+                            <div class="stock-indicator-name">Margem EBITDA</div>
+                            <div class="stock-indicator-value" id="ebitdaMargin">42,8%</div>
+                        </div>
+                        <div class="stock-indicator">
+                            <div class="stock-indicator-name">Margem Líquida</div>
+                            <div class="stock-indicator-value" id="netMargin">25,3%</div>
+                        </div>
+                        <div class="stock-indicator">
+                            <div class="stock-indicator-name">ROIC</div>
+                            <div class="stock-indicator-value" id="roic">15,7%</div>
+                        </div>
+                        <div class="stock-indicator">
+                            <div class="stock-indicator-name">Crescimento Receita (5 anos)</div>
+                            <div class="stock-indicator-value" id="revenueGrowth">8,2%</div>
+                        </div>
+                        <div class="stock-indicator">
+                            <div class="stock-indicator-name">Crescimento Lucro (5 anos)</div>
+                            <div class="stock-indicator-value" id="earningsGrowth">12,5%</div>
+                        </div>
+                        <div class="stock-indicator">
+                            <div class="stock-indicator-name">Liquidez Corrente</div>
+                            <div class="stock-indicator-value" id="currentRatio">1,8</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stock-details-content" id="chartTab">
+                    <div class="chart-container">
+                        <canvas id="stockChart"></canvas>
+                    </div>
+                </div>
+                <div class="stock-details-content" id="newsTab">
+                    <div class="stock-news-container">
+                        <div class="news-card">
+                            <div class="news-content">
+                                <h3 class="news-title">Petrobras anuncia novo plano de investimentos</h3>
+                                <p class="news-date">Hoje, 10:30</p>
+                                <p class="news-summary">A Petrobras anunciou hoje seu novo plano de investimentos para os próximos 5 anos, com foco em exploração e produção no pré-sal.</p>
+                                <p class="news-source">Fonte: InfoMoney</p>
+                            </div>
+                        </div>
+                        <div class="news-card">
+                            <div class="news-content">
+                                <h3 class="news-title">Analistas elevam preço-alvo da Petrobras</h3>
+                                <p class="news-date">Ontem, 15:45</p>
+                                <p class="news-summary">Após resultados do último trimestre, analistas de grandes bancos elevaram o preço-alvo das ações da Petrobras.</p>
+                                <p class="news-source">Fonte: Valor Econômico</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard -->
+        <div class="dashboard">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Índice Bovespa</h3>
+                </div>
+                <div class="card-value">125.430</div>
+                <div class="card-footer">
+                    <span class="trend-up">+1,2%</span>
+                    <span>hoje</span>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">S&P 500</h3>
+                </div>
+                <div class="card-value">5.230</div>
+                <div class="card-footer">
+                    <span class="trend-up">+0,8%</span>
+                    <span>hoje</span>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Dólar</h3>
+                </div>
+                <div class="card-value">R$ 5,12</div>
+                <div class="card-footer">
+                    <span class="trend-down">-0,3%</span>
+                    <span>hoje</span>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Oportunidades</h3>
+                </div>
+                <div class="card-value">8</div>
+                <div class="card-footer">
+                    <span class="trend-up">+2</span>
+                    <span>desde ontem</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carteira da Clearview -->
+        <section class="section" id="carteira">
+            <div class="section-header">
+                <h2 class="section-title">Carteira da Clearview Capital</h2>
+                <span>Atualizado: 21/04/2025 - 14:30</span>
+            </div>
+            <table class="stock-table">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Empresa</th>
+                        <th>Cotação</th>
+                        <th>Variação</th>
+                        <th>P/L</th>
+                        <th>Div. Yield</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="stock-row">
+                        <td>PETR4</td>
+                        <td>PETROBRAS PN</td>
+                        <td>R$ 36,75</td>
+                        <td class="trend-up">+2,15%</td>
+                        <td>6,8</td>
+                        <td>12,4%</td>
+                        <td><span class="badge badge-success">Compra</span></td>
+                    </tr>
+                    <tr class="stock-row">
+                        <td>VALE3</td>
+                        <td>VALE ON</td>
+                        <td>R$ 68,20</td>
+                        <td class="trend-up">+1,50%</td>
+                        <td>5,2</td>
+                        <td>10,8%</td>
+                        <td><span class="badge badge-success">Compra</span></td>
+                    </tr>
+                    <tr class="stock-row">
+                        <td>ITUB4</td>
+                        <td>ITAÚ UNIBANCO PN</td>
+                        <td>R$ 34,85</td>
+                        <td class="trend-down">-0,35%</td>
+                        <td>9,1</td>
+                        <td>5,2%</td>
+                        <td><span class="badge badge-warning">Manter</span></td>
+                    </tr>
+                    <tr class="stock-row">
+                        <td>WEGE3</td>
+                        <td>WEG ON</td>
+                        <td>R$ 42,30</td>
+                        <td class="trend-up">+0,75%</td>
+                        <td>28,5</td>
+                        <td>1,2%</td>
+                        <td><span class="badge badge-warning">Manter</span></td>
+                    </tr>
+                    <tr class="stock-row">
+                        <td>BBDC4</td>
+                        <td>BRADESCO PN</td>
+                        <td>R$ 18,45</td>
+                        <td class="trend-down">-1,20%</td>
+                        <td>8,3</td>
+                        <td>7,5%</td>
+                        <td><span class="badge badge-danger">Venda</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Favoritas da Clearview -->
+        <section class="section" id="favoritas">
+            <div class="section-header">
+                <h2 class="section-title">Favoritas da Clearview</h2>
+                <span>Melhores oportunidades atuais</span>
+            </div>
+            <table class="stock-table">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Empresa</th>
+                        <th>Cotação</th>
+                        <th>Valor Justo</th>
+                        <th>Potencial</th>
+                        <th>P/L</th>
+                        <th>Avaliação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="stock-row">
+                        <td>TAEE11</td>
+                        <td>TAESA UNIT</td>
+                        <td>R$ 35,20</td>
+                        <td>R$ 48,50</td>
+                        <td class="trend-up">+37,8%</td>
+                        <td>7,2</td>
+                        <td><span class="badge badge-opportunity">Ótima Oportunidade</span></td>
+                    </tr>
+                    <tr class="stock-row">
+                        <td>EGIE3</td>
+                        <td>ENGIE BRASIL ON</td>
+                        <td>R$ 42,15</td>
+                        <td>R$ 56,80</td>
+                        <td class="trend-up">+34,8%</td>
+                        <td>8,5</td>
+                        <td><span class="badge badge-opportunity">Ótima Oportunidade</span></td>
+                    </tr>
+                    <tr class="stock-row">
+                        <td>VIVT3</td>
+                        <td>TELEFÔNICA BRASIL ON</td>
+                        <td>R$ 52,30</td>
+                        <td>R$ 68,40</td>
+                        <td class="trend-up">+30,8%</td>
+                        <td>12,3</td>
+                        <td><span class="badge badge-success">Compra</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Notícias do Dia -->
+        <section class="section" id="noticias">
+            <div class="section-header">
+                <h2 class="section-title">Notícias do Dia</h2>
+                <span>Atualizado: 21/04/2025 - 14:30</span>
+            </div>
+            <div class="news-container">
+                <div class="news-card">
+                    <div class="news-content">
+                        <h3 class="news-title">Banco Central mantém taxa Selic em 10,5% ao ano</h3>
+                        <p class="news-date">Hoje, 18:00</p>
+                        <p class="news-summary">O Comitê de Política Monetária (Copom) do Banco Central decidiu, por unanimidade, manter a taxa Selic em 10,5% ao ano, em linha com as expectativas do mercado.</p>
+                        <p class="news-source">Fonte: Banco Central</p>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-content">
+                        <h3 class="news-title">Inflação de março fica em 0,4%, abaixo das expectativas</h3>
+                        <p class="news-date">Hoje, 09:15</p>
+                        <p class="news-summary">O IPCA de março ficou em 0,4%, abaixo da expectativa do mercado que era de 0,5%. No acumulado de 12 meses, a inflação está em 4,2%.</p>
+                        <p class="news-source">Fonte: IBGE</p>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-content">
+                        <h3 class="news-title">Fed sinaliza possível corte de juros nos EUA ainda este ano</h3>
+                        <p class="news-date">Hoje, 16:45</p>
+                        <p class="news-summary">O Federal Reserve (Fed) sinalizou que pode reduzir as taxas de juros nos Estados Unidos ainda este ano, caso a inflação continue desacelerando.</p>
+                        <p class="news-source">Fonte: Bloomberg (Traduzido)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Relatórios e Decisões da IA -->
+        <section class="section" id="relatorios">
+            <div class="section-header">
+                <h2 class="section-title">Relatórios e Decisões da IA</h2>
+                <span>Análises automáticas da Clearview IA</span>
+            </div>
+            <div class="report-container">
+                <div class="report-card">
+                    <div class="report-header">
+                        <h3 class="report-title">Adição de TAEE11 à carteira</h3>
+                        <span class="report-date">Hoje, 10:15</span>
+                    </div>
+                    <p>Adicionamos hoje a TAESA (TAEE11) à nossa carteira recomendada. A empresa apresenta excelentes fundamentos, com P/L de 7,2, dividend yield de 9,8% e baixo endividamento (Dívida/EBITDA de 1,2). Além disso, a companhia opera em um setor regulado, com receitas previsíveis e protegidas contra inflação. Nossa análise indica que a ação está cotada 37,8% abaixo do valor justo calculado pela fórmula de Graham, representando uma excelente oportunidade de investimento.</p>
+                </div>
+                <div class="report-card">
+                    <div class="report-header">
+                        <h3 class="report-title">Remoção de BBDC4 da carteira</h3>
+                        <span class="report-date">Hoje, 11:30</span>
+                    </div>
+                    <p>Decidimos remover o Bradesco (BBDC4) da nossa carteira recomendada. Apesar do banco apresentar um dividend yield atrativo de 7,5%, observamos uma deterioração nos indicadores de qualidade da carteira de crédito nos últimos trimestres, com aumento da inadimplência acima da média do setor. Além disso, a concorrência dos bancos digitais tem pressionado as margens da instituição. Recomendamos a realocação dos recursos em outras oportunidades do setor financeiro com melhor relação risco-retorno.</p>
+                </div>
+                <div class="report-card">
+                    <div class="report-header">
+                        <h3 class="report-title">Análise do Mercado - Perspectivas para 2025</h3>
+                        <span class="report-date">Ontem, 16:45</span>
+                    </div>
+                    <p>Nossa análise do cenário macroeconômico para 2025 indica um ambiente favorável para a bolsa brasileira. Com a expectativa de redução gradual da taxa Selic, projetamos um fluxo maior de recursos para a renda variável. Setores como utilities, consumo e tecnologia devem se beneficiar deste cenário. No entanto, mantemos cautela com o setor bancário tradicional, que enfrenta desafios estruturais. No cenário internacional, a possível redução de juros nos EUA tende a favorecer mercados emergentes como o Brasil, com potencial valorização do Ibovespa.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter -->
+        <section class="section" id="newsletter">
+            <div class="section-header">
+                <h2 class="section-title">Cadastre-se na Newsletter</h2>
+                <span>Receba análises e oportunidades diariamente</span>
+            </div>
+            <div class="newsletter-form">
+                <div class="form-group">
+                    <label for="name" class="form-label">Nome Completo</label>
+                    <input type="text" id="name" class="form-input" placeholder="Seu nome completo">
+                </div>
+                <div class="form-group">
+                    <label for="email" class="form-label">E-mail</label>
+                    <input type="email" id="email" class="form-input" placeholder="seu@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="phone" class="form-label">Telefone</label>
+                    <input type="tel" id="phone" class="form-input" placeholder="(00) 00000-0000">
+                </div>
+                <button class="btn btn-primary">Cadastrar</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p class="footer-text">© Clearview Capital. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/export.js"></script>
+    <script src="js/telegram.js"></script>
+    <!-- Incluir modais e chat -->
+    <div id="modalsContainer"></div>
+    <div id="chatContainer"></div>
+
+    <script>
+        // Carregar componentes
+        document.addEventListener('DOMContentLoaded', function() {
+            // Carregar modais
+            fetch('components/login_modal.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('modalsContainer').innerHTML += html;
+                });
+                
+            fetch('components/register_modal.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('modalsContainer').innerHTML += html;
+                });
+                
+            // Carregar chat
+            fetch('components/chat.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('chatContainer').innerHTML = html;
+                    initChat();
+                });
+        });
+    </script>
+</body>
+</html>

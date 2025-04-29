@@ -1,0 +1,47 @@
+<!-- Modal de Cadastro -->
+<div class="modal" id="registerModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Cadastre-se na Clearview Capital</h2>
+            <span class="close-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="registerName">Nome Completo</label>
+                    <input type="text" id="registerName" class="form-input" placeholder="Seu nome completo" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">E-mail</label>
+                    <input type="email" id="registerEmail" class="form-input" placeholder="Seu e-mail" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPhone">Telefone</label>
+                    <input type="tel" id="registerPhone" class="form-input" placeholder="(00) 00000-0000" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Senha</label>
+                    <input type="password" id="registerPassword" class="form-input" placeholder="Crie uma senha" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPasswordConfirm">Confirme a Senha</label>
+                    <input type="password" id="registerPasswordConfirm" class="form-input" placeholder="Confirme sua senha" required>
+                </div>
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="termsAccept" required>
+                    <label for="termsAccept">Concordo com os <a href="#" class="terms-link">Termos de Uso</a> e <a href="#" class="privacy-link">Política de Privacidade</a></label>
+                </div>
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="newsletterAccept" checked>
+                    <label for="newsletterAccept">Desejo receber a newsletter diária com análises e recomendações</label>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
+                </div>
+                <div class="form-footer">
+                    <p>Já tem uma conta? <a href="#" id="showLoginModal">Faça login</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
