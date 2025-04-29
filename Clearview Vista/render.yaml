@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: clearview-capital
+    env: python
+    buildCommand: ""
+    startCommand: python run.py
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10
+    plan: free
